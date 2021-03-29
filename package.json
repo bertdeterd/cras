@@ -4,11 +4,11 @@
   "description": "cras cli",
   "main": "bin/index.js",
   "bin": {
-    "hello": "./bin/index.js"
+    "cras": "./bin/index.js"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
-  
+   
   },
   "repository": {
     "type": "git",
@@ -22,6 +22,7 @@
   "homepage": "https://github.com/bertdeterd/cras#readme",
   "dependencies": {
     "chalk": "^4.1.0",
+    "colors": "^1.4.0",
     "commander": "^7.2.0",
     "ejs": "^3.1.6",
     "fs-extra": "^9.1.0",
