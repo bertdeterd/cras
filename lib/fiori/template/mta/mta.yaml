@@ -1,45 +1,45 @@
 _schema-version: "3.2"
-ID: <%= appname %>
+ID: <%= appid %>
 version: 0.0.1
 
 modules:
 
-- name: myvsapp-destination-content
+- name: <%= appid %>-destination-content
   type: com.sap.application.content
   requires:
-  - name: uaa_myvsapp 
+  - name: uaa_<%= appid %> 
     parameters:
       service-key:
-        name: uaa_myvsapp-key
-  - name: myvsapp_html_repo_host
+        name: uaa_<%= appid %>-key
+  - name: <%= appid %>_html_repo_host
     parameters:
       service-key:
-        name: myvsapp_html_repo_host-key
-  - name: myvsapp-destination-service
+        name: <%= appid %>_html_repo_host-key
+  - name: <%= appid %>-destination-service
     parameters:
       content-target: true
   parameters:
     content:
       subaccount:
         destinations:
-        - Name: myvsapp_htmlrepohost
-          ServiceInstanceName: myvsapp-html5-app-host-service
-          ServiceKeyName: myvsapp_html_repo_host-key
-          sap.cloud.service: myvsapp
-        - Name: myvsapp_tokenexchange
+        - Name: <%= appid %>_htmlrepohost
+          ServiceInstanceName:  <%= appid %>-html5-app-host-service
+          ServiceKeyName:  <%= appid %>_html_repo_host-key
+          sap.cloud.service: <%= appid %>
+        - Name: <%= appid %>_tokenexchange
           Authentication: OAuth2UserTokenExchange
-          ServiceInstanceName: myvsapp-xsuaa-service
-          ServiceKeyName: uaa_myvsapp-key
-          sap.cloud.service: myvsapp
+          ServiceInstanceName: <%= appid %>-xsuaa-service
+          ServiceKeyName: uaa_<%= appid %>-key
+          sap.cloud.service: <%= appid %>
         existing_destinations_policy: update
   build-parameters:
     no-source: true
 
-- name: myvsapp_ui_deployer
+- name: <%= appid %>_ui_deployer
   type: com.sap.application.content
   path: .
   requires:
-  - name: myvsapp_html_repo_host
+  - name: <%= appid %>_html_repo_host
     parameters:
       content-target: true
   build-parameters:
@@ -52,32 +52,32 @@ modules:
       
 - name: webapp
   type: html5
-  path: webapp
+  path: app/<%= appid %>app
   build-parameters:
     builder: custom
     commands:
         - npm run build
         - npm run zip
-    build-result: dist  
+    build-result: build  
     supported-platforms: []
 
 resources:
-- name: myvsapp-destination-service
+- name: <%= appid %>-destination-service
   type: org.cloudfoundry.managed-service
   parameters:
     service: destination
-    service-name: myvsapp-destination-service
+    service-name: <%= appid %>-destination-service
     service-plan: lite
-- name: myvsapp_html_repo_host
+- name: <%= appid %>_html_repo_host
   type: org.cloudfoundry.managed-service
   parameters:
     service: html5-apps-repo
-    service-name: myvsapp-html5-app-host-service
+    service-name: <%= appid %>-html5-app-host-service
     service-plan: app-host
-- name: uaa_myvsapp
+- name: uaa_<%= appid %>
   type: org.cloudfoundry.managed-service
   parameters:
     path: ./xs-security.json
     service: xsuaa
-    service-name: myvsapp-xsuaa-service
+    service-name: <%= appid %>-xsuaa-service
     service-plan: application

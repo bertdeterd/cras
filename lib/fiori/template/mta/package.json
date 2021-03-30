@@ -9,7 +9,7 @@
       "rimraf": "3.0.2"
     },
     "scripts": {
-      "build": "mbt build",
+      "build:mta": "mbt build",
       "deploy": "cd mta_archives && cf deploy myvsapp_0.0.1.mtar",
       "buildold": "npm run clean && ui5 build --include-task=generateManifestBundle generateCachebusterInfo && npm run zip",
       "zip": "cd app/dist && npx bestzip ../app-content.zip *",
