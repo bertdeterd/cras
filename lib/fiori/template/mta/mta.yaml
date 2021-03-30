@@ -1,0 +1,83 @@
+_schema-version: "3.2"
+ID: <%= appname %>
+version: 0.0.1
+
+modules:
+
+- name: myvsapp-destination-content
+  type: com.sap.application.content
+  requires:
+  - name: uaa_myvsapp 
+    parameters:
+      service-key:
+        name: uaa_myvsapp-key
+  - name: myvsapp_html_repo_host
+    parameters:
+      service-key:
+        name: myvsapp_html_repo_host-key
+  - name: myvsapp-destination-service
+    parameters:
+      content-target: true
+  parameters:
+    content:
+      subaccount:
+        destinations:
+        - Name: myvsapp_htmlrepohost
+          ServiceInstanceName: myvsapp-html5-app-host-service
+          ServiceKeyName: myvsapp_html_repo_host-key
+          sap.cloud.service: myvsapp
+        - Name: myvsapp_tokenexchange
+          Authentication: OAuth2UserTokenExchange
+          ServiceInstanceName: myvsapp-xsuaa-service
+          ServiceKeyName: uaa_myvsapp-key
+          sap.cloud.service: myvsapp
+        existing_destinations_policy: update
+  build-parameters:
+    no-source: true
+
+- name: myvsapp_ui_deployer
+  type: com.sap.application.content
+  path: .
+  requires:
+  - name: myvsapp_html_repo_host
+    parameters:
+      content-target: true
+  build-parameters:
+    build-result: mta_resources
+    requires:
+    - name: webapp
+      artifacts:
+      - webapp-content.zip
+      target-path: mta_resources/
+      
+- name: webapp
+  type: html5
+  path: webapp
+  build-parameters:
+    builder: custom
+    commands:
+        - npm run build
+        - npm run zip
+    build-result: dist  
+    supported-platforms: []
+
+resources:
+- name: myvsapp-destination-service
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: destination
+    service-name: myvsapp-destination-service
+    service-plan: lite
+- name: myvsapp_html_repo_host
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: html5-apps-repo
+    service-name: myvsapp-html5-app-host-service
+    service-plan: app-host
+- name: uaa_myvsapp
+  type: org.cloudfoundry.managed-service
+  parameters:
+    path: ./xs-security.json
+    service: xsuaa
+    service-name: myvsapp-xsuaa-service
+    service-plan: application

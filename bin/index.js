@@ -11,10 +11,10 @@ program
  .version(version, '-v, - version')
  
  program
-    .command('fiori') 
+    .command('fiori <appname>') 
     .description('create cf mta app fiori style') 
-    .action( () => {
-        fiori();
+    .action( (appname) => {
+        fiori(appname);
     });
 
 program.parse(process.argv);
