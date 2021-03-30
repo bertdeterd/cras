@@ -10,7 +10,7 @@
     },
     "scripts": {
       "build:mta": "mbt build",
-      "deploy:mta": "cd mta_archives && cf deploy <%= appname %>_0.0.1.mtar"
+      "deploy:mta": "cd mta_archives && cf deploy <%= appid %>_0.0.1.mtar"
     },
     "ui5": {
       "dependencies": [

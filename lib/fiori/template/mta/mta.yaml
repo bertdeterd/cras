@@ -52,7 +52,7 @@ modules:
       
 - name: webapp
   type: html5
-  path: app/<%= appid %>app
+  path: app/<%= appname %>app
   build-parameters:
     builder: custom
     commands:
