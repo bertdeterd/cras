@@ -10,10 +10,7 @@
     },
     "scripts": {
       "build:mta": "mbt build",
-      "deploy": "cd mta_archives && cf deploy myvsapp_0.0.1.mtar",
-      "buildold": "npm run clean && ui5 build --include-task=generateManifestBundle generateCachebusterInfo && npm run zip",
-      "zip": "cd app/dist && npx bestzip ../app-content.zip *",
-      "clean": "npx rimraf $npm_package_name-content.zip dist"
+      "deploy:mta": "cd mta_archives && cf deploy $npm_package_name_0.0.1.mtar"
     },
     "ui5": {
       "dependencies": [
