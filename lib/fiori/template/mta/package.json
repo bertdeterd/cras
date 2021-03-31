@@ -1,6 +1,9 @@
 {
     "name": "<%= appname %>",
     "version": "0.0.1",
+    "config": {
+        "appid": "<%= appid %>"
+    },
     "devDependencies": {
       "@sapui5/ts-types": "1.71.x",
       "@ui5/cli": "2.2.6",
@@ -10,15 +13,14 @@
     },
     "scripts": {
       "build:mta": "mbt build",
-      "deploy:mta": "cd mta_archives && cf deploy <%= appid %>_0.0.1.mtar",
+      "deploy:mta": "cd mta_archives && cf deploy %npm_package_config_appid%_0.0.1.mtar",
       "html5-list": "cf html5-list",
       "html5-list-url": "cf html5-list -d -u"
-
     },
     "ui5": {
       "dependencies": [
         "@sap/ui5-builder-webide-extension"
       ]
     }
-  }
+}
   
