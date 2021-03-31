@@ -35,7 +35,7 @@ modules:
   build-parameters:
     no-source: true
 
-- name: <%= appid %>_ui_deployer
+- name: webapp_deployer
   type: com.sap.application.content
   path: .
   requires:
@@ -61,7 +61,9 @@ modules:
     build-result: build  
     supported-platforms: []
 
+
 resources:
+
 - name: <%= appid %>-destination-service
   type: org.cloudfoundry.managed-service
   parameters:
