@@ -15,7 +15,7 @@
       "build:mta": "mbt build",
       "deploy:mta": "cd mta_archives && cf deploy %npm_package_config_appid%_0.0.1.mtar",
       "html5-list": "cf html5-list",
-      "html5-list-url": "cf html5-list -d -rt launchpad -u"
+      "html5-list-with-url": "cf html5-list -d -rt launchpad -u"
     },
     "ui5": {
       "dependencies": [
