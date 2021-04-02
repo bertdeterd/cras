@@ -4,18 +4,18 @@ version: 0.0.1
 
 modules:
 
-- name: <%= appid %>-destination-content
+- name: webapp_destination_content
   type: com.sap.application.content
   requires:
-  - name: uaa_<%= appid %> 
+  - name: uaa_service 
     parameters:
       service-key:
-        name: uaa_<%= appid %>-key
-  - name: <%= appid %>_html_repo_host
+        name: <%= appid %>_uaa-key
+  - name: html_repo_host
     parameters:
       service-key:
         name: <%= appid %>_html_repo_host-key
-  - name: <%= appid %>-destination-service
+  - name: uaa_to_host_destination
     parameters:
       content-target: true
   parameters:
@@ -29,7 +29,7 @@ modules:
         - Name: <%= appid %>_tokenexchange
           Authentication: OAuth2UserTokenExchange
           ServiceInstanceName: <%= appid %>-xsuaa-service
-          ServiceKeyName: uaa_<%= appid %>-key
+          ServiceKeyName: <%= appid %>_uaa-key
           sap.cloud.service: <%= appid %>
         existing_destinations_policy: update
   build-parameters:
@@ -39,7 +39,7 @@ modules:
   type: com.sap.application.content
   path: .
   requires:
-  - name: <%= appid %>_html_repo_host
+  - name: html_repo_host
     parameters:
       content-target: true
   build-parameters:
@@ -64,19 +64,19 @@ modules:
 
 resources:
 
-- name: <%= appid %>-destination-service
+- name: uaa_to_host_destination
   type: org.cloudfoundry.managed-service
   parameters:
     service: destination
     service-name: <%= appid %>-destination-service
     service-plan: lite
-- name: <%= appid %>_html_repo_host
+- name: html_repo_host
   type: org.cloudfoundry.managed-service
   parameters:
     service: html5-apps-repo
     service-name: <%= appid %>-html5-app-host-service
     service-plan: app-host
-- name: uaa_<%= appid %>
+- name: uaa_service
   type: org.cloudfoundry.managed-service
   parameters:
     path: ./xs-security.json
