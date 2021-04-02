@@ -37,7 +37,6 @@ program
         ];
 
         inquirer.prompt(questions).then((answers) => {
-            //console.log(JSON.stringify(answers, null, '  '));
             fiori(answers);
         });
 
