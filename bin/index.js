@@ -32,7 +32,7 @@ program
                       return true;
                     }
                     return 'Please enter a short ID (max 3 characters)';
-                  },
+                },
             }
         ];
 
