@@ -18,20 +18,24 @@ The application runs with the managed approuter and is ready to be run on the Fi
 ```
 $ cras fiori 
 ```
+After completion go to your newly created folder<br>
 
 
 ## Build
+In your main folder for your mta project<br>
 ```js
 $ npm run build:mta
 ```
 
 
 ## Deploy
+In your main folder for your mta project<br>
+This script also does a build:mta<br>
 ```js
 $ npm run deploy:mta
 ```
 
-dev:
+## Dev:
 test: node . fiori
 test global: 
 - npm install -g .
