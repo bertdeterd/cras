@@ -1,9 +1,18 @@
 {
   "name": "cras",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "cras cli",
   "main": "bin/index.js",
-  "keywords": [ "SAP", "BTP", "React", "MTA", "Cloud", "generator", "UI5", "Fiori" ],
+  "keywords": [
+    "SAP",
+    "BTP",
+    "React",
+    "MTA",
+    "Cloud",
+    "generator",
+    "UI5",
+    "Fiori"
+  ],
   "bin": {
     "cras": "./bin/index.js"
   },
